@@ -87,7 +87,7 @@ end tell")))
                   (load-theme auto-dark-emacs/dark-theme t))
                 (if window-system
                     (set-frame-parameter nil 'background-mode 'dark)
-                  (set-terminal-parameter nil 'background-mode 'dark)
+                  (set-terminal-parameter nil 'background-mode 'dark))
                 (enable-theme auto-dark-emacs/dark-theme))
             (progn
               (when (not (equal auto-dark-emacs/light-theme auto-dark-emacs/dark-theme))
