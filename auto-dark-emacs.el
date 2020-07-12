@@ -82,12 +82,22 @@ end tell")))
           (setq auto-dark-emacs/last-dark-mode-state is-dark-mode)
           (if is-dark-mode
               (progn
-                (load-theme auto-dark-emacs/dark-theme t)
-                (disable-theme auto-dark-emacs/light-theme))
+                (when (not (equal auto-dark-emacs/light-theme auto-dark-emacs/dark-theme))
+                  (disable-theme auto-dark-emacs/light-theme)
+                  (load-theme auto-dark-emacs/dark-theme t))
+                (if window-system
+                    (set-frame-parameter frame 'background-mode 'dark)
+                  (set-terminal-parameter frame 'background-mode 'dark))
+                (enable-theme auto-dark-emacs/dark-theme))
             (progn
-              (load-theme auto-dark-emacs/light-theme t)
-              (disable-theme auto-dark-emacs/dark-theme)))))))
+              (when (not (equal auto-dark-emacs/light-theme auto-dark-emacs/dark-theme))
+                (disable-theme auto-dark-emacs/dark-theme)
+                (load-theme auto-dark-emacs/light-theme t))
+              (if window-system
+                  (set-frame-parameter frame 'background-mode 'light)
+                (set-terminal-parameter frame 'background-mode 'light))
+              (enable-theme auto-dark-emacs/light-theme))))))
 
-(run-with-timer 0 auto-dark-emacs/polling-interval-seconds 'auto-dark-emacs/check-and-set-dark-mode)
+  (run-with-timer 0 auto-dark-emacs/polling-interval-seconds 'auto-dark-emacs/check-and-set-dark-mode)
 
 (provide 'auto-dark-emacs)
