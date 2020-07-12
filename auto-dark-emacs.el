@@ -96,8 +96,8 @@ end tell")))
               (if window-system
                   (set-frame-parameter frame 'background-mode 'light)
                 (set-terminal-parameter frame 'background-mode 'light))
-              (enable-theme auto-dark-emacs/light-theme))))))
+              (enable-theme auto-dark-emacs/light-theme)))))))
 
-  (run-with-timer 0 auto-dark-emacs/polling-interval-seconds 'auto-dark-emacs/check-and-set-dark-mode)
+(run-with-timer 0 auto-dark-emacs/polling-interval-seconds 'auto-dark-emacs/check-and-set-dark-mode)
 
 (provide 'auto-dark-emacs)
